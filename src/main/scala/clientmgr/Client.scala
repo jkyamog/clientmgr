@@ -1,5 +1,0 @@
-package clientmgr
-
-class Client {
-
-}
