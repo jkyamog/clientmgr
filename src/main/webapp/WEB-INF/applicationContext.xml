@@ -11,7 +11,7 @@
        
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:clientmgrtest" />
+        <property name="url" value="jdbc:h2:clientmgr" />
         <property name="username" value="sa" />
         <property name="password" value="" />
     </bean>
