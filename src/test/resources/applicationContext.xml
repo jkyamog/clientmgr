@@ -39,5 +39,6 @@
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
   
     <bean id="clientDao" class="clientmgr.dao.ClientDao"/>
+    <bean id="accountDaoJ" class="clientmgr.dao.AccountDaoJ"/>
   
 </beans>
