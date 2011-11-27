@@ -31,7 +31,11 @@ object Account {
 	
 	def create(account: Account)(implicit em: EntityManager) = em.persist(account)
 	
-	def create(accountId: String)(implicit em: EntityManager):Unit = create(apply(accountId))
+	def create(accountId: String)(implicit em: EntityManager): Account = {
+		val account = apply(accountId)
+		create(account)
+		account
+	}
 
 	def update(account: Account)(implicit em: EntityManager) = em.merge(account)
 	

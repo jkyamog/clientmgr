@@ -9,6 +9,7 @@ import java.util.{List => JList}
 import javax.persistence.OneToMany
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
+import scala.collection.mutable.ArrayBuffer
 
 
 @Entity
@@ -25,7 +26,11 @@ class Client {
 	@OneToMany 
 	private var accounts: JList[Account] = _
 	
-	def accountList = accounts.toList
+	def accountList = { 
+		if (accounts != null) 
+		accounts.toBuffer 
+		else new ArrayBuffer[Account]()
+	}
 }
 
 object Client {
@@ -40,8 +45,10 @@ object Client {
 	
 	def findAll(implicit clientDao: ClientDao) = clientDao.findByAll
 	
-	def create(firstName: String, lastName: String)(implicit clientDao: ClientDao) {
-		create(apply(firstName, lastName))
+	def create(firstName: String, lastName: String)(implicit clientDao: ClientDao): Client = {
+		val client = apply(firstName, lastName)
+		create(client)
+		client
 	}
 	
 	def create(client: Client)(implicit clientDao: ClientDao) {
