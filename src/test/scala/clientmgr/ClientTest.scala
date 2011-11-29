@@ -67,7 +67,7 @@ class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
 		val account = Account("123")
 		accountDao.create(account)
 		
-		client.accountList += account
+		client.accounts += account
 		
 		clientDao.update(client)
 		
@@ -75,14 +75,14 @@ class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
 		
 		val clients = em.createQuery("select c from Client c", classOf[Client]).getResultList.toList
 		
-		val clientsWithAccounts = clients filter (_.accountList.size == 0)
+		val clientsWithAccounts = clients filter (_.accounts.size == 0)
 		
 		assertEquals(1, clientsWithAccounts size)
 		
 		val accounts = accountDao.findAllAsList
 		
 		clientsWithAccounts foreach { client =>
-			client.accountList foreach { account =>
+			client.accounts foreach { account =>
 				assertTrue(accounts exists (_.accountId == account.accountId))
 			}
 		}

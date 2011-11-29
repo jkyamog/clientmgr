@@ -1,15 +1,10 @@
 package clientmgr.model
 
 import javax.persistence.Entity
-import javax.annotation.Resource
-import clientmgr.dao.ClientDao
-import scala.collection.JavaConversions._
 import java.util.{List => JList}
 import javax.persistence.OneToMany
-import scala.collection.mutable.ArrayBuffer
-
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
+import clientmgr.util.CollectionUtils._
+import javax.persistence.JoinTable
 
 @Entity
 class Client extends GeneratedId {
@@ -18,14 +13,11 @@ class Client extends GeneratedId {
 	
 	var lastName: String = _
 	
-	@OneToMany 
-	private var accounts: JList[Account] = _
+	@OneToMany
+	@JoinTable(name = "Client_Accounts")
+	private var _accounts: JList[Account] = _
 	
-	def accountList = { 
-		if (accounts != null) 
-		accounts.toBuffer 
-		else new ArrayBuffer[Account]()
-	}
+	def accounts = asBufferOrEmptyBuffer[Account](_accounts) 
 }
 
 object Client {
