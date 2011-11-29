@@ -12,6 +12,7 @@ import javax.persistence.EntityManager
 import javax.annotation.Resource
 import clientmgr.dao.AccountDaoJ
 import clientmgr.model.AccountJ
+import clientmgr.dao.AccountDao
 
 @ContextConfiguration(locations=Array("classpath:applicationContext.xml"))
 class AccountTest extends AbstractTransactionalJUnit4SpringContextTests {
@@ -21,10 +22,14 @@ class AccountTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Resource
 	private var accountDaoJ: AccountDaoJ = _
+	
+	@Resource
+	private var accountDao: AccountDao = _
 
 	@Before
 	def before {
-		val a = Account.create("123")
+		val a = Account("123")
+		accountDao.create(a)
 	}
 	
 	@Test
@@ -49,10 +54,22 @@ class AccountTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
 	@Test
 	def createAccounts {
-		val account = Account.create("456")
+		val account = Account("456")
+		accountDao.create(account)
 		
 		assertEquals(2, em.createQuery("select a from Account a").getResultList.size)
-		assertEquals(2, Account.findAll.size)
+		assertEquals(2, accountDao.findAllAsList.size)
+	}
+	
+	@Test
+	def deleteAccount {
+		val accounts = accountDao.findAllAsList
+		
+		accountDao.delete(accounts head)
+		
+		em.flush; em.clear;
+		
+		assertEquals(0, accountDao.findAllAsList.size)
 	}
 
 }

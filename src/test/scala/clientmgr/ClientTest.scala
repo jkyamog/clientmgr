@@ -11,58 +11,65 @@ import clientmgr.model.Client
 import javax.persistence.PersistenceContext
 import javax.persistence.EntityManager
 import clientmgr.model.Account
+import clientmgr.dao.AccountDao
 
 @ContextConfiguration(locations=Array("classpath:applicationContext.xml"))
 class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
+
+	@PersistenceContext
+	private var em: EntityManager = _
+
+	@Resource
+	var clientDao: ClientDao = _
 	
 	@Resource
-	implicit var clientDao: ClientDao = _
-	
-	@PersistenceContext
-	implicit private var em: EntityManager = _
-	
+	var accountDao: AccountDao = _
+
 	@Test
 	def createClients {
 		val client = Client("John", "Smith")
 		
 		clientDao.create(client)
 		
-		val clients = clientDao.findByAll
+		val clients = clientDao.findAllAsList
 		
 		assertEquals(1, clients.size)
 		
-		assertEquals(1, Client.findAll.size)
+		assertEquals(1, clientDao.findAllAsList.size)
 		
 	}
 	
 	@Test
 	def updateClients {
-		Client.create("John", "Smith")
+		clientDao.create(Client("John", "Smith"))
 		
-		val clients = Client.findAll
+		val clients = clientDao.findAllAsList
 		
 		val updatedClients = clients map { client =>
 			client.firstName = "Updated"
 			client
 		}
 		
-		updatedClients.foreach (Client.update)
+		updatedClients.foreach (clientDao.update)
 		
 		em.flush; em.clear
 		
-		val clients2 = Client.findAll
+		val clients2 = clientDao.findAllAsList
 		
 		assertEquals(1, clients filter (_.firstName == "Updated") size)
 	}
 	
 	@Test
 	def addAccounts {
-		val client = Client.create("John", "Smith")
-		val account = Account.create("123")
+		
+		val client = Client("John", "Smith")
+		clientDao.create(client)
+		val account = Account("123")
+		accountDao.create(account)
 		
 		client.accountList += account
 		
-		Client.update(client)
+		clientDao.update(client)
 		
 		em.flush; em.clear
 		
@@ -72,7 +79,7 @@ class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
 		
 		assertEquals(1, clientsWithAccounts size)
 		
-		val accounts = Account.findAll
+		val accounts = accountDao.findAllAsList
 		
 		clientsWithAccounts foreach { client =>
 			client.accountList foreach { account =>
