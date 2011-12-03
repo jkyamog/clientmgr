@@ -72,16 +72,28 @@
 			<version>2.2.2</version>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>com.codahale</groupId>
 			<artifactId>jerkson_${scala.version}</artifactId>
 			<version>0.5.0</version>
-		</dependency>
+		</dependency> --> 
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>1.9.1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+		<!-- 
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -149,7 +161,6 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<version>2.8</version>
 				<configuration>
-					<wtpversion>2.0</wtpversion>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 					<excludes>
@@ -210,10 +221,10 @@
 			<name>Scala-tools Maven2 Repository</name>
 			<url>http://scala-tools.org/repo-releases</url>
 		</repository>
-		<repository>
+<!--		<repository>
 			<id>repo.codahale.com</id>
 			<url>http://repo.codahale.com</url>
-		</repository>
+		</repository>  -->
 	</repositories>
 
 	<pluginRepositories>
