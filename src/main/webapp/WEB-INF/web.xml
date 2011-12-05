@@ -21,7 +21,7 @@
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>clientmgr.rest</param-value>
+			<param-value>clientmgr.rest;com.codahale.jersey.providers</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

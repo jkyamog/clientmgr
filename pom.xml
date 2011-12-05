@@ -72,28 +72,23 @@
 			<version>2.2.2</version>
 			<scope>compile</scope>
 		</dependency>
-<!--		<dependency>
+		<dependency>
 			<groupId>com.codahale</groupId>
-			<artifactId>jerkson_${scala.version}</artifactId>
-			<version>0.5.0</version>
-		</dependency> --> 
+			<artifactId>jersey-scala_${scala.version}</artifactId>
+			<version>0.2.0</version>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-server</artifactId>
 			<version>1.9.1</version>
 		</dependency>
+<!-- 		
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-json</artifactId>
 			<version>1.9.1</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.2</version>
-		</dependency>
-		 -->
+-->		
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -171,11 +166,18 @@
 						<classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
 					</classpathContainers>
 					<projectnatures>
-						<java.lang.String>org.scala-ide.sdt.core.scalanature</java.lang.String>
-						<java.lang.String>org.eclipse.jdt.core.javanature</java.lang.String>
+					    <java.lang.String>org.eclipse.jem.workbench.JavaEMFNature</java.lang.String>
+					    <java.lang.String>org.eclipse.wst.common.modulecore.ModuleCoreNature</java.lang.String>
+					    <java.lang.String>org.scala-ide.sdt.core.scalanature</java.lang.String>
+					    <java.lang.String>org.eclipse.jdt.core.javanature</java.lang.String>
+					    <java.lang.String>org.eclipse.wst.common.project.facet.core.nature</java.lang.String>
+					    <java.lang.String>org.eclipse.wst.jsdt.core.jsNature</java.lang.String>
 					</projectnatures>
 					<buildcommands>
+						<java.lang.String>org.eclipse.wst.jsdt.core.javascriptValidator</java.lang.String>
+						<java.lang.String>org.eclipse.wst.common.project.facet.core.builder</java.lang.String>
 						<java.lang.String>org.scala-ide.sdt.core.scalabuilder</java.lang.String>
+						<java.lang.String>org.eclipse.wst.validation.validationbuilder</java.lang.String>
 					</buildcommands>
 					<sourceIncludes>
 						<sourceInclude>**/*</sourceInclude>
@@ -221,10 +223,10 @@
 			<name>Scala-tools Maven2 Repository</name>
 			<url>http://scala-tools.org/repo-releases</url>
 		</repository>
-<!--		<repository>
+		<repository>
 			<id>repo.codahale.com</id>
 			<url>http://repo.codahale.com</url>
-		</repository>  -->
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
