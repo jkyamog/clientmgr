@@ -6,7 +6,7 @@ import javax.persistence.Entity
 @Entity
 class Account extends GeneratedId {
 
-	var accountId: String = _
+	var accountId: String = ""
 
 }
 

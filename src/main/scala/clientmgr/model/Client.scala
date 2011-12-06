@@ -2,22 +2,23 @@ package clientmgr.model
 
 import javax.persistence.Entity
 import java.util.{List => JList}
+import java.util.ArrayList
 import javax.persistence.OneToMany
-import clientmgr.util.CollectionUtils._
+import scala.collection.JavaConversions._
 import javax.persistence.JoinTable
 
 @Entity
 class Client extends GeneratedId {
 	
-	var firstName: String = _
+	var firstName: String = ""
 	
-	var lastName: String = _
+	var lastName: String = ""
 	
 	@OneToMany
 	@JoinTable(name = "Client_Accounts")
-	private var _accounts: JList[Account] = _
+	private var _accounts: JList[Account] = new ArrayList
 	
-	def accounts = asBufferOrEmptyBuffer[Account](_accounts) 
+	def accounts = _accounts.toBuffer
 }
 
 object Client {
