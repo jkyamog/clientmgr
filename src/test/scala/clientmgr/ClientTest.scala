@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext
 import javax.persistence.EntityManager
 import clientmgr.model.Account
 import clientmgr.dao.AccountDao
+import clientmgr.model.ClientType
 
 @ContextConfiguration(locations=Array("classpath:applicationContext.xml"))
 class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
@@ -36,6 +37,8 @@ class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
 		assertEquals(1, clients.size)
 		
 		assertEquals(1, clientDao.findAllAsList.size)
+		
+		assertEquals(ClientType.Public, clients.head.clientType)
 		
 	}
 	
@@ -75,11 +78,15 @@ class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
 		
 		val clients = em.createQuery("select c from Client c", classOf[Client]).getResultList.toList
 		
-		val clientsWithAccounts = clients filter (_.accounts.size == 0)
+		clients.foreach(c => c.accounts.foreach(a => println(a.accountId)))
+		
+		val clientsWithAccounts = clients filter (_.accounts.size != 0)
 		
 		assertEquals(1, clientsWithAccounts size)
 		
 		val accounts = accountDao.findAllAsList
+		
+		println(accounts)
 		
 		clientsWithAccounts foreach { client =>
 			client.accounts foreach { account =>

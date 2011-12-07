@@ -4,8 +4,9 @@ import javax.persistence.Entity
 import java.util.{List => JList}
 import java.util.ArrayList
 import javax.persistence.OneToMany
-import scala.collection.JavaConversions._
-import javax.persistence.JoinTable
+import javax.persistence.CascadeType
+import javax.persistence.Enumerated
+import javax.persistence.EnumType
 
 @Entity
 class Client extends GeneratedId {
@@ -14,11 +15,11 @@ class Client extends GeneratedId {
 	
 	var lastName: String = ""
 	
-	@OneToMany
-	@JoinTable(name = "Client_Accounts")
-	private var _accounts: JList[Account] = new ArrayList
+	@OneToMany(cascade=Array(CascadeType.ALL))
+	var accounts: JList[Account] = new ArrayList
 	
-	def accounts = _accounts.toBuffer
+	@Enumerated(value = EnumType.STRING)
+	var clientType: ClientType = _
 }
 
 object Client {
@@ -27,6 +28,7 @@ object Client {
 		val client = new Client
 		client.firstName = firstName
 		client.lastName = lastName
+		client.clientType = ClientType.Public
 		
 		client
 	}
