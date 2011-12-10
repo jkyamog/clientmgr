@@ -40,6 +40,11 @@ class ClientTest extends AbstractTransactionalJUnit4SpringContextTests {
 		
 		assertEquals(ClientType.Public, clients.head.clientType)
 		
+		client.clientType match {
+			case ClientType.Public => assertTrue(true)
+			case ClientType.Private => fail
+		}
+		
 	}
 	
 	@Test
