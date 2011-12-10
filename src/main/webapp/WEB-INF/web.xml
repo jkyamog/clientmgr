@@ -14,7 +14,7 @@
 	<servlet>
 		<description>JAX-RS Tools Generated - Do not modify</description>
 		<servlet-name>Rest</servlet-name>
-		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
 		<init-param>
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
 			<param-value>true</param-value>

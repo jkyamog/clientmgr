@@ -7,15 +7,27 @@ import javax.ws.rs.core.MediaType
 import clientmgr.model._
 import clientmgr.dto.ClientDto
 import java.util.ArrayList
+import javax.annotation.Resource
+import clientmgr.dao.ClientDao
+import com.sun.jersey.spi.inject.Inject
+import org.springframework.stereotype.Component
+import org.springframework.beans.factory.annotation.Autowired
 
+@Component
 @Path("/client")
 class ClientResource {
+	
+	@Autowired
+	var clientDao: ClientDao = _
 
 	@GET
 	@Path("/testscala")
 	@Produces(Array(MediaType.APPLICATION_JSON))
 	def getClients = {
-		Array(ClientDto("user", "scala1"), ClientDto("user", "scala2"))
+		clientDao.create(Client("test", "user"))
+		
+		clientDao.findAllAsList map(c => ClientDto(c.firstName, c.lastName))
+		
 	}
 
 	@GET
