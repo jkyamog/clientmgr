@@ -206,8 +206,8 @@
 						<exclude>org.scala-lang:scala-library</exclude>
 					</excludes>
 					<classpathContainers>
-						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER </classpathContainer>
 						<classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
+						<classpathContainer>org.eclipse.jdt.launching.JRE_CONTAINER </classpathContainer>
 					</classpathContainers>
 					<projectnatures>
 					    <java.lang.String>org.eclipse.jem.workbench.JavaEMFNature</java.lang.String>
