@@ -10,8 +10,6 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 import javax.persistence.PersistenceContext
 import javax.persistence.EntityManager
 import javax.annotation.Resource
-import clientmgr.dao.AccountDaoJ
-import clientmgr.model.AccountJ
 import clientmgr.dao.AccountDao
 
 @ContextConfiguration(locations=Array("classpath:applicationContext.xml"))
@@ -21,35 +19,12 @@ class AccountTest extends AbstractTransactionalJUnit4SpringContextTests {
 	implicit private var em: EntityManager = _
 	
 	@Resource
-	private var accountDaoJ: AccountDaoJ = _
-	
-	@Resource
 	private var accountDao: AccountDao = _
 
 	@Before
 	def before {
 		val a = Account("123")
 		accountDao.create(a)
-	}
-	
-	@Test
-	def createAccountsJ {
-		
-		val a = new AccountJ
-		a.setAccountId("123")
-		
-		accountDaoJ.create(a)
-		
-		val a2 = new AccountJ
-		a2.setAccountId("456")
-		
-		accountDaoJ.create(a2)
-		
-		assertEquals(2, em.createQuery("select a from AccountJ a").getResultList.size)
-		
-		for (a <- accountDaoJ.findAll: Seq[AccountJ]) {
-			println(a.getId + " " + a.getAccountId)
-		}
 	}
 	
 	@Test
