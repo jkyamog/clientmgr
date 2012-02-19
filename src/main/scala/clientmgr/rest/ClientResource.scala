@@ -27,7 +27,8 @@ class ClientResource {
 	def getClients = {
 		clientDao.create(Client("test", "user"))
 		
-		clientDao.findAllAsList map(c => ClientDto(c.firstName, c.lastName))
+//		clientDao.findAllAsList map(c => ClientDto(c.firstName, c.lastName))
+		Map("aaData" -> (clientDao.findAllAsList map(c => Array(c.firstName, c.lastName))))
 		
 	}
 
